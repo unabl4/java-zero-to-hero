@@ -9,5 +9,16 @@ public class Millionaire {
         // add a list of cars to Garage
         // add another Ferrari to Garage
         // make Garage print out a list of cars in it
+
+        Garage garage = new Garage();
+        Ferrari ferrari = new Ferrari();
+        garage.setFerrari(ferrari);
+
+        System.out.println(ferrari);
+
+        garage.addCar(ferrari);
+        garage.addCar(ferrari);
+
+        garage.printCars();
     }
 }

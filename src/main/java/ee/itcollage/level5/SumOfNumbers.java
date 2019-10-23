@@ -10,7 +10,8 @@ public class SumOfNumbers {
             //todo add gradle dependency for apache collectionutils and rewrite this condition with isNotEmpty
             return null;
         }
-        return integerList.get(0);
+
+        return integerList.stream().reduce(0, Integer::sum);
     }
 
 }

@@ -22,6 +22,14 @@ public class FizzBuzzGame {
             //do your logic
             System.out.print(number);
             System.out.print(" ");
+
+            if((number % 3 == 0) && (number % 5 == 0)) {
+                System.out.print("fizzbuzz ");
+            } else if(number % 3 == 0) {
+                System.out.print("fizz ");
+            } else if(number % 5 == 0) {
+                System.out.print("buzz ");
+            }
         }
         System.out.println();
     }

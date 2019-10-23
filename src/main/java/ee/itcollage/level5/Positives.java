@@ -1,6 +1,7 @@
 package ee.itcollage.level5;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Positives {
 
@@ -11,7 +12,7 @@ public class Positives {
      * For example:
      * 1, -2, -3 => 1
      */
-    public static List<Integer> analyze(List<Integer> integers){
-        return integers;
+    static List<Integer> analyze(List<Integer> integers){
+        return integers.stream().filter(i -> i > 0).collect(Collectors.toList());
     }
 }

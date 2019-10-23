@@ -1,18 +1,22 @@
 package ee.itcollage.level1;
 
-public class Ferrari {
+class Ferrari {
 
-    public void drive(){
+    void drive(){
         System.out.println("RRRRRRRRRRR");
     }
 
-    public void stop(){
+    void stop(){
         System.out.println("EHEHEHEHEHEHE");
     }
 
-    public void drift(){
+    void drift(){
         //todo add method body
     }
 
     //todo create more methods
+
+    void start() {
+        System.out.println("Booting this marvelous V12 engine in 3 .. 2 .. 1 ...");
+    }
 }
