@@ -26,19 +26,54 @@ public class CarPicker {
         Integer amount = scanner.nextInt();
         System.out.println("Your input: " + amount);
 
-        Stream<Car> cars = garage.stream()
+        Stream<Car> carStream = garage.stream()
                 .sorted(Comparator.comparing(Car::getCost).reversed())
                 .filter(c -> c.getCost() <= amount);
-        Car chosenCar = cars.findFirst().orElseGet(Car::new);   // or null
+        List<Car> carsList = carStream.collect(Collectors.toList());
+        Optional<Car> chosenCar = carsList.stream().findFirst();
 
-        System.out.println("\n");
-        System.out.println("Shop recommends you: " + chosenCar);
+        if(chosenCar.isPresent()) {
+            System.out.println("\n");
+            System.out.println("Shop recommends you: " + chosenCar.get());
+        } else {
+            System.out.println("There is nothing to recommend");
+            return;
+        }
 
         //todo ADVANCED
         // ask user 2nd question (+rating)
+        System.out.println("Min. rating");
+        Double minRating = scanner.nextDouble();
+
+        carStream = carsList.stream()
+                .filter(c -> c.getUserRating() >= minRating)
+                .sorted(Comparator.comparing(Car::getUserRating).reversed());   // sort by rating (desc)
+        carsList = carStream.collect(Collectors.toList());
+        chosenCar = carsList.stream().findFirst();
+
+        if(chosenCar.isPresent()) {
+            System.out.println("\n");
+            System.out.println("Shop recommends you: " + chosenCar.get());
+        } else {
+            System.out.println("There is nothing to recommend");
+            return; // nothing found
+        }
 
         //todo ADVANCED
         // ask user 3rd question (+electric)
+        System.out.println("Is electric?");
+        boolean isElectric = scanner.nextBoolean();
+
+        carStream = carsList.stream().filter(c -> c.isElectric() == isElectric);
+        carsList = carStream.collect(Collectors.toList());
+        chosenCar = carsList.stream().findFirst();
+
+        if(chosenCar.isPresent()) {
+            System.out.println("\n");
+            System.out.println("Shop recommends you: " + chosenCar.get());
+        } else {
+            System.out.println("There is nothing to recommend");
+        }
     }
 
     private static Car buildCar(String name, int cost, boolean electric, double userRating) {
