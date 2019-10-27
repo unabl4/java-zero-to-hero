@@ -1,8 +1,8 @@
 package ee.itcollage.level12;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CarPicker {
 
@@ -10,11 +10,11 @@ public class CarPicker {
         //todo 3 simulate picking a car
 
         List<Car> garage = Arrays.asList(
-                buildCar("Lamborgini Avendator", 2000000, false, 10.0),
-                buildCar("Tesla Roadster", 100000, true, 9.0),
-                buildCar("Toyota Prius", 20000, false, 5.0),
-                buildCar("Lada", 5000, false, 2.0),
-                buildCar("Bicycle", 100, false, 0.5)
+            buildCar("Lamborgini Avendator", 2000000, false, 10.0),
+            buildCar("Tesla Roadster", 100000, true, 9.0),
+            buildCar("Toyota Prius", 20000, false, 5.0),
+            buildCar("Lada", 5000, false, 2.0),
+            buildCar("Bicycle", 100, false, 0.5)
         );
         System.out.println("Garage contains: \n" + garage);
         //todo 3.1 what does garage print? Can you make it print something prettier?
@@ -22,15 +22,17 @@ public class CarPicker {
         //todo 3.2 Ask user how much money do they have and pick them a car or cars based on cars you have in garage
         // uncomment following lines for reading input example
         Scanner scanner = new Scanner(System.in);
-        //System.out.println("How much money do you have?");
-        //String input = scanner.nextLine();
-        //System.out.println("Your input: " + input);
+        System.out.println("How much money do you have?");
+        Integer amount = scanner.nextInt();
+        System.out.println("Your input: " + amount);
 
-
-        Car car = garage.get(0);
+        Stream<Car> cars = garage.stream()
+                .sorted(Comparator.comparing(Car::getCost).reversed())
+                .filter(c -> c.getCost() <= amount);
+        Car chosenCar = cars.findFirst().orElseGet(Car::new);   // or null
 
         System.out.println("\n");
-        System.out.println("Shop recommends you: " + car);
+        System.out.println("Shop recommends you: " + chosenCar);
 
         //todo ADVANCED
         // ask user 2nd question (+rating)

@@ -7,11 +7,11 @@ public class Car {
     private Double userRating;
     private Integer cost;
 
-    public String getModel() {
+    private String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    void setModel(String model) {
         this.model = model;
     }
 
@@ -19,7 +19,7 @@ public class Car {
         return electric;
     }
 
-    public void setElectric(boolean electric) {
+    void setElectric(boolean electric) {
         this.electric = electric;
     }
 
@@ -27,15 +27,20 @@ public class Car {
         return userRating;
     }
 
-    public void setUserRating(Double userRating) {
+    void setUserRating(Double userRating) {
         this.userRating = userRating;
     }
 
-    public Integer getCost() {
+    Integer getCost() {
         return cost;
     }
 
-    public void setCost(Integer cost) {
+    void setCost(Integer cost) {
         this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return this.model;
     }
 }
