@@ -1,6 +1,9 @@
 package ee.itcollage.level13;
 
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.partitioningBy;
 
 public class PalindromeWords {
 
@@ -14,7 +17,8 @@ public class PalindromeWords {
      * cow (reversed woc) is not a palindrome
      */
     public AnalysisResult analyzePalindromes(List<String> strings){
-        return new AnalysisResult();
+        Map<Boolean, List<String>> partition = strings.stream().collect(partitioningBy(this::isPalindrome));
+        return new AnalysisResult(partition.get(true), partition.get(false));
     }
 
     public static void main(String[] args) {
@@ -25,5 +29,9 @@ public class PalindromeWords {
 
         System.out.println(String.format("%s %s", palidrome, reversedPalidrome));
         System.out.println(String.format("%s %s", other, otherReversed));
+    }
+
+    private boolean isPalindrome(String word) {
+        return new StringBuilder(word).reverse().toString().equals(word);
     }
 }
